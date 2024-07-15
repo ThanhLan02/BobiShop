@@ -26,5 +26,12 @@ class AuthenticateMiddleware
             $find = User::find(Auth::user()->id);
         }
         return $next($request); 
+        // if($request->user()->role=='2'){
+        //     return $next($request);
+        // }
+        // else{
+        //     session()->flash('error','You do not have any permission to access this page');
+        //     return redirect()->route($request->user()->role);
+        // }
     }
 }

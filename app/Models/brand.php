@@ -12,4 +12,7 @@ class brand extends Model
         'name',
     ];
     protected $table = 'brands';
+    public function products(){
+        return $this->hasMany('App\Models\Product','brand_id','id')->where('status','active');
+    }
 }

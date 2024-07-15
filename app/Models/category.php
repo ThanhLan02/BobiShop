@@ -12,4 +12,8 @@ class category extends Model
         'name',
     ];
     protected $table = 'category';
+    public function products(){
+        return $this->hasMany('App\Models\Product','category_id','id')->where('status','active');
+    }
+
 }

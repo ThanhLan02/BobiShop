@@ -6,6 +6,7 @@ use App\Http\Controllers\Backend\HomeController;
 use App\Http\Controllers\Backend\DashboardController;
 use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\Backend\ProductController;
 use App\Http\Middleware\AuthenticateMiddleware;
 /*
 |--------------------------------------------------------------------------
@@ -47,9 +48,23 @@ Route::get('categorycreate', [CategoryController::class, 'categorycreate'])->nam
 Route::post('categorystore', [CategoryController::class, 'categorystore'])->name('admin.categorystore')->middleware(AuthenticateMiddleware::class);
 Route::get('categoryupdate/{id}', [CategoryController::class, 'categoryupdate'])->where(['id' => '[0-9]+'])->name
 ('admin.categoryupdate')->middleware(AuthenticateMiddleware::class);
-Route::post('branddoupdate/{id}', [CategoryController::class, 'categorydoupdate'])->where(['id' => '[0-9]+'])->name
+Route::post('categorydoupdate/{id}', [CategoryController::class, 'categorydoupdate'])->where(['id' => '[0-9]+'])->name
 ('admin.categorydoupdate')->middleware(AuthenticateMiddleware::class);
 Route::delete('categorydelete/{id}', [CategoryController::class, 'categorydelete'])->where(['id' => '[0-9]+'])->name
 ('admin.categorydelete')->middleware(AuthenticateMiddleware::class);
+
+// admin-products
+Route::get('product', [ProductController::class, 'index'])->name('admin.product')->middleware(AuthenticateMiddleware::class);
+Route::get('productcreate', [ProductController::class, 'productcreate'])->name('admin.productcreate')->middleware(AuthenticateMiddleware::class);
+Route::post('productstore', [ProductController::class, 'productstore'])->name('admin.productstore')->middleware(AuthenticateMiddleware::class);
+Route::get('productupdate/{id}', [ProductController::class, 'productupdate'])->where(['id' => '[0-9]+'])->name
+('admin.productupdate')->middleware(AuthenticateMiddleware::class);
+Route::post('productdoupdate/{id}', [ProductController::class, 'productdoupdate'])->where(['id' => '[0-9]+'])->name
+('admin.productdoupdate')->middleware(AuthenticateMiddleware::class);
+Route::delete('productdelete/{id}', [ProductController::class, 'productdelete'])->where(['id' => '[0-9]+'])->name
+('admin.productdelete')->middleware(AuthenticateMiddleware::class);
+Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
+    \UniSharp\LaravelFilemanager\Lfm::routes();
+});
 
 

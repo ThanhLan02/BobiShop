@@ -48,4 +48,5 @@
 <script src="{{ URL::asset('dist/js/demo.js') }}"></script>
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ URL::asset('dist/js/pages/dashboard.js') }}"></script>
+<script src="{{ URL::asset('vendor/laravel-filemanager/js/filemanager.js') }}"></script>
 @stack('scripts')
