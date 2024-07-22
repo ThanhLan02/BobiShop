@@ -14,7 +14,7 @@
           <img src="{{ asset('dist/img/user2-160x160.jpg') }}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">BoBiShop</a>
+          <a href="/dashboard" class="d-block">BoBiShop</a>
         </div>
       </div>
 
@@ -36,11 +36,10 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item ">
-            <a href="#" class="nav-link">
+            <a href="/dasboard" class="nav-link">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
                 Dashboard
-                
               </p>
             </a>
             
@@ -51,24 +50,23 @@
               <p>
                Quản lý
                 <i class="fas fa-angle-left right"></i>
-                <span class="badge badge-info right">6</span>
               </p>
             </a>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/product" class="nav-link">
                   <i class="fas fa-project-diagram nav-icon"></i>
                   <p>Sản phẩm</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/category" class="nav-link">
                   <i class="fas fa-project-diagram nav-icon"></i>
                   <p>Loại sản phẩm</p>
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/brand" class="nav-link">
                   <i class="fas fa-project-diagram nav-icon"></i>
                   <p>Hãng sản phẩm</p>
                 </a>

@@ -19,10 +19,20 @@ class User extends Authenticatable
      */
     protected $fillable = [
         'name',
+        'phone',
+        'address',
+        'birthday',
+        'gender',
+        'image',
+        'description',
         'email',
         'password',
+        'role',
     ];
-
+    protected $table = 'users';
+    public function role(){
+        return $this->hasOne(brand::class,'id','role_id');
+    }
     /**
      * The attributes that should be hidden for serialization.
      *

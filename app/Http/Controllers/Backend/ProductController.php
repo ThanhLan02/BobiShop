@@ -17,6 +17,7 @@ use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Log;
 
 class ProductController extends Controller
 {
@@ -27,7 +28,7 @@ class ProductController extends Controller
     }
     public function index(){
 
-        $products = product::paginate(5);
+        $products = product::paginate(3);
         $brands = brand::all();
         return view('admin.product.index',compact('products','brands'));
     }
@@ -125,5 +126,14 @@ class ProductController extends Controller
             session()->flash('error','Cập nhật không thành công');
         }
         return redirect()->route('admin.product');
+    }
+    public function updateProductStatus(Request $request, $id)
+    {
+        $product = Product::findOrFail($id);
+        $product->status = $request->input('status');
+        $product->save();
+
+        // Redirect back or to another page
+        return response()->json(['message' => 'Cập nhật thành công'], 200);
     }
 }

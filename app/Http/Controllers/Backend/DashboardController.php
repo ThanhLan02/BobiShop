@@ -18,7 +18,7 @@ class DashboardController extends Controller
         if(Session::get('user') > 0)
         {
             $find = User::find(Session::get('user'));
-            if($find->role == 2)
+            if($find->role == 'admin')
             {
                 // $danhthucn = hoadon::where('NguoiNhan',Session::get('user'))->sum('TongTien');
                 // $danhthucnformat = number_format($danhthucn,0);
@@ -33,7 +33,7 @@ class DashboardController extends Controller
             }
             else
             {
-                return redirect()->route('Trangchu.index')->with('error','Bạn không có quyền truy cập vào trang này!!');
+                return redirect()->route('Home.index')->with('error','Bạn không có quyền truy cập vào trang này!!');
             }
         }
         

@@ -1,16 +1,16 @@
 <footer class="main-footer">
-    <strong>Copyright &copy; 2024 <a href="https://www.facebook.com/profile.php?id=100008376696821">Lân - HELPER</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 1.0.0
-    </div>
-  </footer>
+  <strong>Copyright &copy; 2024 <a href="https://www.facebook.com/profile.php?id=100008376696821">Lân - HELPER</a>.</strong>
+  All rights reserved.
+  <div class="float-right d-none d-sm-inline-block">
+    <b>Version</b> 1.0.0
+  </div>
+</footer>
 
-  <!-- Control Sidebar -->
-  <aside class="control-sidebar control-sidebar-dark">
-    <!-- Control sidebar content goes here -->
-  </aside>
-  <!-- /.control-sidebar -->
+<!-- Control Sidebar -->
+<aside class="control-sidebar control-sidebar-dark">
+  <!-- Control sidebar content goes here -->
+</aside>
+<!-- /.control-sidebar -->
 </div>
 <!-- ./wrapper -->
 
@@ -49,4 +49,5 @@
 <!-- AdminLTE dashboard demo (This is only for demo purposes) -->
 <script src="{{ URL::asset('dist/js/pages/dashboard.js') }}"></script>
 <script src="{{ URL::asset('vendor/laravel-filemanager/js/filemanager.js') }}"></script>
+<script src="{{ URL::asset('https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js') }}"></script>
 @stack('scripts')

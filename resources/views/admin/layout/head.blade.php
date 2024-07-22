@@ -25,4 +25,7 @@
   <link rel="stylesheet" href="{{asset('plugins/summernote/summernote-bs4.min.css')}}">
 
   <link rel="stylesheet" href="{{asset('/vendor/laravel-filemanager/css/lfm.css')}}">
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Include jQuery (optional if you want to use jQuery for event handling) -->
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 </head>

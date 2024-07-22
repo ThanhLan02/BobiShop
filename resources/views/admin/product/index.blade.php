@@ -62,7 +62,7 @@
                                         <img src="{{$product->image}}" width="200px" height="200px" alt="">
                                     </td>
                                     <td>
-                                    {{$product->description}}
+                                        {{$product->description}}
                                     </td>
                                     @if($product->condition == 'new')
                                     <td><span class="badge bg-success">{{$product->condition}}</span></td>
@@ -74,14 +74,16 @@
                                     <td>
 
                                         <div class="form-group">
-                                            <div class="custom-control custom-switch">
 
+                                            <div class="custom-control custom-switch">
+                                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                                <input type="hidden" id="modelId{{ $product->id }}" value="{{ $product->id }}">
+                                                <input type="checkbox" class="custom-control-input status" id="customSwitch{{ $product->id }}" name="status" value="{{ $product->status }}" {{ $product->status == 'active' ? 'checked' : '' }}>
+                                                <!-- <input type="checkbox" class="custom-control-input status" id="customSwitch{{ $product->id }}" data-product-id="{{ $product->id }}" {{ $product->status == 'active' ? 'checked' : '' }}> -->
                                                 @if($product->status == 'active')
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch{{$product->id}}" checked>
-                                                <label class="custom-control-label" for="customSwitch{{$product->id}}">Active</label>
+                                                <label class="custom-control-label" for="customSwitch{{ $product->id }}">Active</label>
                                                 @else
-                                                <input type="checkbox" class="custom-control-input" id="customSwitch{{$product->id}}">
-                                                <label class="custom-control-label" for="customSwitch{{$product->id}}">InActive</label>
+                                                <label class="custom-control-label" for="customSwitch{{ $product->id }}">Inactive</label>
                                                 @endif
                                             </div>
                                         </div>
@@ -126,7 +128,7 @@
 
 <!-- Page level plugins -->
 
-<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>\
 </script>
 <script>
     console.log('Loading');
@@ -157,5 +159,69 @@
                 });
         })
     })
+</script>
+<script>
+    $(document).ready(function() {
+        $('.status').change(function() {
+            var status = $(this).is(':checked') ? 'active' : 'inactive';
+            var token = $('input[name="_token"]').val();
+            var id = $(this).closest('.custom-control').find('input[type="hidden"][id^="modelId"]').val();
+            console.log('Status:', status, 'ID:', id, 'Token:', token);
+
+            $.ajax({
+                url: '/update-status-product/' + id,
+                method: 'PUT',
+                headers: {
+                    'X-CSRF-TOKEN': $('meta[name="_token"]').attr('content')
+                },
+                data: {
+                    '_token': token,
+                    'id': id,
+                    'status': status
+                },
+                success: function(response) {
+                    console.log(response);
+                    Swal.fire({
+                        icon: "success",
+                        title: "Update Status Product successfully",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                },
+                error: function(xhr) {
+                    console.log(xhr.responseText);
+                    Swal.fire({
+                        icon: "error",
+                        title: "Oops...",
+                        text: "Something went wrong!",
+                    });
+                }
+            });
+        });
+    });
+    //     $(document).ready(function() {
+    //     $('.status').on('click', function() {
+    //         var productId = $(this).data('product-id');
+    //         var status = $(this).prop('checked') ? 'active' : 'inactive';
+    //         var token = $('input[name="_token"]').val();
+    //         console.log(status);
+    //         console.log(productId);
+    //         $.ajax({
+    //             type: 'GET',
+    //             url: '/update-status-product',
+    //             data: {
+    //                 '_token': token,
+    //                 'product_id': productId,
+    //                 'status': status
+    //             },
+    //             success: function(data) {
+    //                 console.log('Product status updated successfully!');
+    //             },
+    //             error: function(xhr, status, error) {
+    //                 console.log('Error updating product status: ' + error);
+    //             }
+    //         });
+    //     });
+    // });
 </script>
 @endpush

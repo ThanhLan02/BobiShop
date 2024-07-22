@@ -1,338 +1,154 @@
-<!-- BEGIN STYLE CUSTOMIZER -->
-<div class="color-panel hidden-sm">
-      <div class="color-mode-icons icon-color"></div>
-      <div class="color-mode-icons icon-color-close"></div>
-      <div class="color-mode">
-        <p>THEME COLOR</p>
-        <ul class="inline">
-          <li class="color-red current color-default" data-style="red"></li>
-          <li class="color-blue" data-style="blue"></li>
-          <li class="color-green" data-style="green"></li>
-          <li class="color-orange" data-style="orange"></li>
-          <li class="color-gray" data-style="gray"></li>
-          <li class="color-turquoise" data-style="turquoise"></li>
-        </ul>
-      </div>
-    </div>
-    <!-- END BEGIN STYLE CUSTOMIZER --> 
+		<!-- HEADER -->
+		<header>
+			<!-- TOP HEADER -->
+			<div id="top-header">
+				<div class="container">
+					<ul class="header-links pull-left">
+						<li><a href="#"><i class="fa fa-phone"></i> 0904613293</a></li>
+						<li><a href="#"><i class="fa fa-envelope-o"></i> tranthanhlanth9@gmail.com</a></li>
+						<li><a href="#"><i class="fa fa-map-marker"></i> 75 Tô Hiệu, Hiệp Tân, Tân Phú, TPHCM</a></li>
+					</ul>
+					<ul class="header-links pull-right">
+						<li><a href="#"><i class="fa fa-dollar"></i> VND</a></li>
+						
+						@if(Session::has('user'))
+							<li><a href="#"><i class="fa fa-user"></i> HI {{Session::get('username')}}</a></li>
+							<li><a href="/logout"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
+						@else
+							<li><a href="/login"><i class="fa fa-user-o"></i> LOGIN</a></li>
+						@endif
+					</ul>
+				</div>
+			</div>
+			<!-- /TOP HEADER -->
 
-    <!-- BEGIN TOP BAR -->
-    <div class="pre-header">
-        <div class="container">
-            <div class="row">
-                <!-- BEGIN TOP BAR LEFT PART -->
-                <div class="col-md-6 col-sm-6 additional-shop-info">
-                    <ul class="list-unstyled list-inline">
-                        <li><i class="fa fa-phone"></i><span>+84 904 613 293</span></li>
-                        <!-- BEGIN CURRENCIES -->
-                        <li class="shop-currencies">
-                            <a href="javascript:void(0);" class="current">VNĐ</a>
-                        </li>
-                        <!-- END CURRENCIES -->
-                    </ul>
-                </div>
-                <!-- END TOP BAR LEFT PART -->
-                <!-- BEGIN TOP BAR MENU -->
-                <div class="col-md-6 col-sm-6 additional-nav">
-                    <ul class="list-unstyled list-inline pull-right">
-                        <li><a href="shop-account.html">Tài Khoản</a></li>
-                        <li><a href="shop-wishlist.html">Wishlist</a></li>
-                        <li><a href="shop-checkout.html">Đơn Hàng</a></li>
-                        <li><a href="page-login.html">Đăng Nhập</a></li>
-                    </ul>
-                </div>
-                <!-- END TOP BAR MENU -->
-            </div>
-        </div>        
-    </div>
-    <!-- END TOP BAR -->
+			<!-- MAIN HEADER -->
+			<div id="header">
+				<!-- container -->
+				<div class="container">
+					<!-- row -->
+					<div class="row">
+						<!-- LOGO -->
+						<div class="col-md-3">
+							<div class="header-logo">
+								<a href="#" class="logo">
+									<img src="/storage/photos/1/image/logo.png" alt="">
+								</a>
+							</div>
+						</div>
+						<!-- /LOGO -->
 
-    <!-- BEGIN HEADER -->
-    <div class="header">
-      <div class="container">
-        <a class="site-logo" href="shop-index.html"><img style="width: 128px;height: 50px;object-fit: contain;" src="assets/corporate/img/logos/logo-bobi.jpg" alt="Metronic Shop UI"></a>
+						<!-- SEARCH BAR -->
+						<div class="col-md-6">
+							<div class="header-search">
+								<form>
+									<select class="input-select">
+										<option value="0">All Categories</option>
+										<option value="1">Category 01</option>
+										<option value="1">Category 02</option>
+									</select>
+									<input class="input" placeholder="Search here">
+									<button class="search-btn">Search</button>
+								</form>
+							</div>
+						</div>
+						<!-- /SEARCH BAR -->
 
-        <a href="javascript:void(0);" class="mobi-toggler"><i class="fa fa-bars"></i></a>
+						<!-- ACCOUNT -->
+						<div class="col-md-3 clearfix">
+							<div class="header-ctn">
+								<!-- Wishlist -->
+								<div>
+									<a href="#">
+										<i class="fa fa-heart-o"></i>
+										<span>Your Wishlist</span>
+										<div class="qty">2</div>
+									</a>
+								</div>
+								<!-- /Wishlist -->
 
-        <!-- BEGIN CART -->
-        <div class="top-cart-block">
-          <div class="top-cart-info">
-            <a href="javascript:void(0);" class="top-cart-info-count">3 items</a>
-            <a href="javascript:void(0);" class="top-cart-info-value">$1260</a>
-          </div>
-          <i class="fa fa-shopping-cart"></i>
-                        
-          <div class="top-cart-content-wrapper">
-            <div class="top-cart-content">
-              <ul class="scroller" style="height: 250px;">
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-                <li>
-                  <a href="shop-item.html"><img src="assets/pages/img/cart-img.jpg" alt="Rolex Classic Watch" width="37" height="34"></a>
-                  <span class="cart-content-count">x 1</span>
-                  <strong><a href="shop-item.html">Rolex Classic Watch</a></strong>
-                  <em>$1230</em>
-                  <a href="javascript:void(0);" class="del-goods">&nbsp;</a>
-                </li>
-              </ul>
-              <div class="text-right">
-                <a href="shop-shopping-cart.html" class="btn btn-default">View Cart</a>
-                <a href="shop-checkout.html" class="btn btn-primary">Checkout</a>
-              </div>
-            </div>
-          </div>            
-        </div>
-        <!--END CART -->
+								<!-- Cart -->
+								<div class="dropdown">
+									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
+										<i class="fa fa-shopping-cart"></i>
+										<span>Your Cart</span>
+										<div class="qty">3</div>
+									</a>
+									<div class="cart-dropdown">
+										<div class="cart-list">
+											<!-- Cart LIST-->
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product01.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">1x</span>$980.00</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
 
-        <!-- BEGIN NAVIGATION -->
-        <div class="header-navigation">
-          <ul>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                Woman 
-                
-              </a>
-                
-              <!-- BEGIN DROPDOWN MENU -->
-              <ul class="dropdown-menu">
-                <li class="dropdown-submenu">
-                  <a href="shop-product-list.html">Hi Tops <i class="fa fa-angle-right"></i></a>
-                  <ul class="dropdown-menu" role="menu">
-                    <li><a href="shop-product-list.html">Second Level Link</a></li>
-                    <li><a href="shop-product-list.html">Second Level Link</a></li>
-                    <li class="dropdown-submenu">
-                      <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                        Second Level Link 
-                        <i class="fa fa-angle-right"></i>
-                      </a>
-                      <ul class="dropdown-menu">
-                        <li><a href="shop-product-list.html">Third Level Link</a></li>
-                        <li><a href="shop-product-list.html">Third Level Link</a></li>
-                        <li><a href="shop-product-list.html">Third Level Link</a></li>
-                      </ul>
-                    </li>
-                  </ul>
-                </li>
-                <li><a href="shop-product-list.html">Running Shoes</a></li>
-                <li><a href="shop-product-list.html">Jackets and Coats</a></li>
-              </ul>
-              <!-- END DROPDOWN MENU -->
-            </li>
-            <li class="dropdown dropdown-megamenu">
-              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                Man
-                
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <div class="header-navigation-content">
-                    <div class="row">
-                      <div class="col-md-4 header-navigation-col">
-                        <h4>Footwear</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Astro Trainers</a></li>
-                          <li><a href="shop-product-list.html">Basketball Shoes</a></li>
-                          <li><a href="shop-product-list.html">Boots</a></li>
-                          <li><a href="shop-product-list.html">Canvas Shoes</a></li>
-                          <li><a href="shop-product-list.html">Football Boots</a></li>
-                          <li><a href="shop-product-list.html">Golf Shoes</a></li>
-                          <li><a href="shop-product-list.html">Hi Tops</a></li>
-                          <li><a href="shop-product-list.html">Indoor and Court Trainers</a></li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4 header-navigation-col">
-                        <h4>Clothing</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Base Layer</a></li>
-                          <li><a href="shop-product-list.html">Character</a></li>
-                          <li><a href="shop-product-list.html">Chinos</a></li>
-                          <li><a href="shop-product-list.html">Combats</a></li>
-                          <li><a href="shop-product-list.html">Cricket Clothing</a></li>
-                          <li><a href="shop-product-list.html">Fleeces</a></li>
-                          <li><a href="shop-product-list.html">Gilets</a></li>
-                          <li><a href="shop-product-list.html">Golf Tops</a></li>
-                        </ul>
-                      </div>
-                      <div class="col-md-4 header-navigation-col">
-                        <h4>Accessories</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Belts</a></li>
-                          <li><a href="shop-product-list.html">Caps</a></li>
-                          <li><a href="shop-product-list.html">Gloves, Hats and Scarves</a></li>
-                        </ul>
+											<div class="product-widget">
+												<div class="product-img">
+													<img src="./img/product02.png" alt="">
+												</div>
+												<div class="product-body">
+													<h3 class="product-name"><a href="#">product name goes here</a></h3>
+													<h4 class="product-price"><span class="qty">3x</span>$980.00</h4>
+												</div>
+												<button class="delete"><i class="fa fa-close"></i></button>
+											</div>
+										</div>
+										<div class="cart-summary">
+											<small>3 Item(s) selected</small>
+											<h5>SUBTOTAL: $2940.00</h5>
+										</div>
+										<div class="cart-btns">
+											<a href="#">View Cart</a>
+											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+										</div>
+									</div>
+								</div>
+								<!-- /Cart -->
 
-                        <h4>Clearance</h4>
-                        <ul>
-                          <li><a href="shop-product-list.html">Jackets</a></li>
-                          <li><a href="shop-product-list.html">Bottoms</a></li>
-                        </ul>
-                      </div>
-                      <div class="col-md-12 nav-brands">
-                        <ul>
-                          <li><a href="shop-product-list.html"><img title="esprit" alt="esprit" src="assets/pages/img/brands/esprit.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="gap" alt="gap" src="assets/pages/img/brands/gap.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="next" alt="next" src="assets/pages/img/brands/next.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="puma" alt="puma" src="assets/pages/img/brands/puma.jpg"></a></li>
-                          <li><a href="shop-product-list.html"><img title="zara" alt="zara" src="assets/pages/img/brands/zara.jpg"></a></li>
-                        </ul>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li><a href="shop-item.html">Kids</a></li>
-            <li class="dropdown dropdown100 nav-catalogue">
-              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                New
-                
-              </a>
-              <ul class="dropdown-menu">
-                <li>
-                  <div class="header-navigation-content">
-                    <div class="row">
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                          </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model3.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                          </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model7.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                          </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                      </div>
-                      <div class="col-md-3 col-sm-4 col-xs-6">
-                        <div class="product-item">
-                          <div class="pi-img-wrapper">
-                            <a href="shop-item.html"><img src="assets/pages/img/products/model4.jpg" class="img-responsive" alt="Berry Lace Dress"></a>
-                          </div>
-                          <h3><a href="shop-item.html">Berry Lace Dress</a></h3>
-                          <div class="pi-price">$29.00</div>
-                          <a href="javascript:;" class="btn btn-default add2cart">Add to cart</a>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </li>
-              </ul>
-            </li>
-            <li class="dropdown">
-              <a class="dropdown-toggle" data-toggle="dropdown" data-target="#" href="javascript:;">
-                Pages 
-                
-              </a>
-                
-              <ul class="dropdown-menu">
-                <li class="active"><a href="shop-index.html">Home Default</a></li>
-                <li><a href="shop-index-header-fix.html">Home Header Fixed</a></li>
-                <li><a href="shop-index-light-footer.html">Home Light Footer</a></li>
-                <li><a href="shop-product-list.html">Product List</a></li>
-                <li><a href="shop-search-result.html">Search Result</a></li>
-                <li><a href="shop-item.html">Product Page</a></li>
-                <li><a href="shop-shopping-cart-null.html">Shopping Cart (Null Cart)</a></li>
-                <li><a href="shop-shopping-cart.html">Shopping Cart</a></li>
-                <li><a href="shop-checkout.html">Checkout</a></li>
-                <li><a href="shop-about.html">About</a></li>
-                <li><a href="shop-contacts.html">Contacts</a></li>
-                <li><a href="shop-account.html">My account</a></li>
-                <li><a href="shop-wishlist.html">My Wish List</a></li>
-                <li><a href="shop-goods-compare.html">Product Comparison</a></li>
-                <li><a href="shop-standart-forms.html">Standart Forms</a></li>
-                <li><a href="shop-faq.html">FAQ</a></li>
-                <li><a href="shop-privacy-policy.html">Privacy Policy</a></li>
-                <li><a href="shop-terms-conditions-page.html">Terms &amp; Conditions</a></li>
-              </ul>
-            </li>
-            
-            
-            <li><a href="http://themeforest.net/item/metronic-responsive-admin-dashboard-template/4021469?ref=keenthemes&amp;utm_source=download&amp;utm_medium=banner&amp;utm_campaign=metronic_frontend_freebie" target="_blank">Admin theme</a></li>
+								<!-- Menu Toogle -->
+								<div class="menu-toggle">
+									<a href="#">
+										<i class="fa fa-bars"></i>
+										<span>Menu</span>
+									</a>
+								</div>
+								<!-- /Menu Toogle -->
+							</div>
+						</div>
+						<!-- /ACCOUNT -->
+					</div>
+					<!-- row -->
+				</div>
+				<!-- container -->
+			</div>
+			<!-- /MAIN HEADER -->
+		</header>
+		<!-- /HEADER -->
 
-            <!-- BEGIN TOP SEARCH -->
-            <li class="menu-search">
-              <span class="sep"></span>
-              <i class="fa fa-search search-btn"></i>
-              <div class="search-box">
-                <form action="#">
-                  <div class="input-group">
-                    <input type="text" placeholder="Search" class="form-control">
-                    <span class="input-group-btn">
-                      <button class="btn btn-primary" type="submit">Search</button>
-                    </span>
-                  </div>
-                </form>
-              </div> 
-            </li>
-            <!-- END TOP SEARCH -->
-          </ul>
-        </div>
-        <!-- END NAVIGATION -->
-      </div>
-    </div>
-    <!-- Header END -->
+		<!-- NAVIGATION -->
+		<nav id="navigation">
+			<!-- container -->
+			<div class="container">
+				<!-- responsive-nav -->
+				<div id="responsive-nav">
+					<!-- NAV -->
+					<ul class="main-nav nav navbar-nav">
+						<li class="active"><a href="#">Trang Chủ</a></li>
+						<li><a href="#">Khuyến Mãi</a></li>
+						<li><a href="#">Xe cơ giới</a></li>
+						<li><a href="#">Tài xế</a></li>
+						<li><a href="#">About</a></li>
+					</ul>
+					<!-- /NAV -->
+				</div>
+				<!-- /responsive-nav -->
+			</div>
+			<!-- /container -->
+		</nav>
+		<!-- /NAVIGATION -->

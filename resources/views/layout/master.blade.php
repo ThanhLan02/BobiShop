@@ -5,22 +5,14 @@
 
 <body>
 
-  <!-- Page Wrapper -->
-  <div id="wrapper">
-
     <!-- Sidebar -->
     @include('layout.headbar')
     <!-- End of Sidebar -->
-
+    @yield('main-content')
     <!-- Content Wrapper -->
-    <div class="container">
-        
-        @yield('main-content')
-
-      </div>
-      <!-- End of Main Content -->
-      @include('layout.footer')
-
+    <!-- End of Main Content -->
+    @include('layout.footer')
+    @stack('scripts')
 </body>
 
 </html>
