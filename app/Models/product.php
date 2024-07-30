@@ -28,9 +28,9 @@ class product extends Model
     public function category(){
         return $this->hasOne(category::class,'id','category_id');
     }
-    // public function images(){
-    //     return $this->hasMany(Image::class,'product_id','id');
-    // }
+    public function images(){
+        return $this->hasMany(Image::class,'product_id','id');
+    }
     // public function orderDetails(){
     //     return $this->hasMany(OrderDetail::class,'product_id','id');
     // }

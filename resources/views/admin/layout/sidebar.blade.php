@@ -72,7 +72,7 @@
                 </a>
               </li>
               <li class="nav-item">
-                <a href="pages/layout/top-nav.html" class="nav-link">
+                <a href="/image" class="nav-link">
                   <i class="fas fa-project-diagram nav-icon"></i>
                   <p>Ảnh sản phẩm</p>
                 </a>

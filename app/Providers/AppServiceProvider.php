@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use Illuminate\Support\Facades\View;
 use Illuminate\Support\ServiceProvider;
 
 class AppServiceProvider extends ServiceProvider
@@ -23,6 +24,10 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot()
     {
-        //
+        // View::composer('*', function ($view) {
+        //     // Giả sử bạn có một service hoặc model để lấy dữ liệu cart
+        //     $cart = \App\Services\CartService::getCart();
+        //     $view->with('cart', $cart);
+        // });
     }
 }

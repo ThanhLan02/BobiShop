@@ -84,6 +84,8 @@
 								<div class="products-slick" data-nav="#slick-nav-1">
 									<!-- product -->
 									 @foreach($product_news as $product)
+									 <form action="{{ route('single-add-to-cart',$product->id) }}" method="POST" >
+									@csrf
 									<div class="product">
 										<div class="product-img">
 											<img src="{{$product->image}}" alt="">
@@ -96,7 +98,7 @@
 										</div>
 										<div class="product-body">
 											<p class="product-category">{{$product->category->name}}</p>
-											<h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
+											<h3 class="product-name"><a href="product_detail/{{$product->id}}">{{$product->name}}</a></h3>
 											@if($product->discount != null)
 											<h4 class="product-price">{{number_format($product->new_price, 0)}} VNĐ <del
 													class="product-old-price">{{number_format($product->old_price, 0)}} VNĐ</del></h4>
@@ -124,6 +126,7 @@
 												giỏ hàng</button>
 										</div>
 									</div>
+									 </form>
 									@endforeach
 								</div>
 								<div id="slick-nav-1" class="products-slick-nav"></div>
@@ -172,6 +175,8 @@
 								<div class="products-slick" data-nav="#slick-nav-2">
 									<!-- product -->
 									@foreach($product_hots as $product)
+									<form action="{{ route('single-add-to-cart',$product->id) }}" method="POST" >
+									@csrf
 									<div class="product">
 										<div class="product-img">
 											<img src="{{$product->image}}" alt="">
@@ -184,7 +189,7 @@
 										</div>
 										<div class="product-body">
 											<p class="product-category">{{$product->category->name}}</p>
-											<h3 class="product-name"><a href="#">{{$product->name}}</a></h3>
+											<h3 class="product-name"><a href="product_detail/{{$product->id}}">{{$product->name}}</a></h3>
 											@if($product->discount != null)
 											<h4 class="product-price">{{number_format($product->new_price, 0)}} VNĐ <del
 													class="product-old-price">{{number_format($product->old_price, 0)}} VNĐ</del></h4>
@@ -212,6 +217,7 @@
 												giỏ hàng</button>
 										</div>
 									</div>
+									</form>
 									@endforeach
 									<!-- /product -->
 								</div>

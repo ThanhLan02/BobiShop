@@ -8,6 +8,9 @@ use App\Http\Controllers\Backend\BrandsController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\Backend\ProductController;
 use App\Http\Controllers\Backend\UsersController;
+use App\Http\Controllers\Backend\ImageController;
+use App\Http\Controllers\Backend\CartController;
+use App\Http\Controllers\Backend\OrdersController;
 use Illuminate\Support\Facades\Http;
 use App\Http\Middleware\AuthenticateMiddleware;
 
@@ -86,6 +89,18 @@ Route::delete('usersdelete/{id}', [UsersController::class, 'usersdelete'])->wher
 Route::put('/update-status-users/{id}', [UsersController::class, 'updateUsersStatus'])->where(['id' => '[0-9]+'])->name
 ('admin.updateUsersStatus')->middleware(AuthenticateMiddleware::class);
 
+// admin-images
+Route::get('image', [ImageController::class, 'index'])->name('admin.image')->middleware(AuthenticateMiddleware::class);
+Route::get('imagecreate', [ImageController::class, 'imagecreate'])->name('admin.imagecreate')->middleware(AuthenticateMiddleware::class);
+Route::post('imagestore', [ImageController::class, 'imagestore'])->name('admin.imagestore')->middleware(AuthenticateMiddleware::class);
+Route::get('imageupdate/{id}', [ImageController::class, 'imageupdate'])->where(['id' => '[0-9]+'])->name
+('admin.imageupdate')->middleware(AuthenticateMiddleware::class);
+Route::post('imagedoupdate/{id}', [ImageController::class, 'imagedoupdate'])->where(['id' => '[0-9]+'])->name
+('admin.imagedoupdate')->middleware(AuthenticateMiddleware::class);
+Route::delete('imagedelete/{id}', [ImageController::class, 'imagedelete'])->where(['id' => '[0-9]+'])->name
+('admin.imagedelete')->middleware(AuthenticateMiddleware::class);
+
+// province routes
 Route::get('/provinceapi', [UsersController::class, 'provinceapi'])->name('admin.provinceapi')->middleware(AuthenticateMiddleware::class);
 
 Route::get('/get-districts/{province_id}', [UsersController::class, 'getDistricts'])->name('get-districts');
@@ -105,9 +120,41 @@ Route::get('/get-ward-name/{ward_id}', [UsersController::class, 'getWardName'])-
 //     $response = Http::get("https://provinces.open-api.vn/api/p/$provinceCode/d/$districtCode/w");
 //     return $response->body();
 // });
+// admin-orders
+Route::get('orders', [OrdersController::class, 'index'])->name('admin.orders')->middleware(AuthenticateMiddleware::class);
+
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
 });
 
+// User
+Route::get('product_detail/{id}', [HomeController::class, 'product_detail'])->where(['id' => '[0-9]+'])->name
+('home.product_detail');
+Route::get('cart', [CartController::class, 'index'])->name
+('user.cart')->middleware(AuthenticateMiddleware::class);
+Route::get('checkout', [CartController::class, 'checkout'])->name
+('user.checkout')->middleware(AuthenticateMiddleware::class);
+Route::post('/add-to-cart/{id}', [CartController::class, 'AddToCart'])->where(['id' => '[0-9]+'])->name
+('single-add-to-cart')->middleware(AuthenticateMiddleware::class);
+Route::post('deletesinglecart/{id}', [CartController::class, 'deletesinglecart'])->where(['id' => '[0-9]+'])->name
+('user.deletesinglecart')->middleware(AuthenticateMiddleware::class);
+Route::post('deleteallcart', [CartController::class, 'deleteallcart'])->where(['id' => '[0-9]+'])->name
+('user.deleteallcart')->middleware(AuthenticateMiddleware::class);
+Route::post('updatequantitycart/{id}', [CartController::class, 'updatequantitycart'])->where(['id' => '[0-9]+'])->name
+('user.updatequantitycart')->middleware(AuthenticateMiddleware::class);
+Route::post('payment_cash', [CartController::class, 'payment_cash'])->where(['id' => '[0-9]+'])->name
+('user.payment_cash')->middleware(AuthenticateMiddleware::class);
 
+Route::get('order_list', [CartController::class, 'order_list'])->name('user.order_list')->middleware(AuthenticateMiddleware::class);
+
+Route::get('tracking_order/{id}', [CartController::class, 'tracking_order'])->where(['id' => '[0-9]+'])->name
+('user.tracking_order')->middleware(AuthenticateMiddleware::class);
+Route::post('paymentmomo', [CartController::class, 'paymentmomo'])->name('user.paymentmomo')->middleware(AuthenticateMiddleware::class);;
+Route::get('thanksfororder', [CartController::class, 'thanksfororder'])->name
+('user.thanksfororder')->middleware(AuthenticateMiddleware::class);
+
+
+Route::post('/payment', [CartController::class, 'pay'])->name('payment');
+Route::get('/payment/return', [CartController::class, 'return'])->name('payment.return');
+Route::post('/payment/notify', [CartController::class, 'notify'])->name('payment.notify');

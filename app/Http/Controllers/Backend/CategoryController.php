@@ -68,7 +68,7 @@ class CategoryController extends Controller
     }
     public function categorydoupdate(CategoryRequest $request, $id)
     {
-        $category=category::find($id);
+        $category=category::findOrFail($id);
         $data=$request->all();
        
         $status=$category->fill($data)->save();

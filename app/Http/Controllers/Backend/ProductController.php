@@ -9,6 +9,7 @@ use App\Http\Requests\ProductRequest;
 use Illuminate\Http\Request;
 use App\Models\brand;
 use App\Models\category;
+use App\Models\image;
 use App\Models\product;
 use App\Models\supplier;
 use App\Models\variant;
@@ -63,9 +64,18 @@ class ProductController extends Controller
             $data['old_price'] = $request->old_price;
             $data['new_price'] = 0;
         }
+        $data_2['url_image'] = $data['image'];
+        
+        
+        
+        
         $status=product::create($data);
         if($status){
             session()->flash('success','Thêm product thành công');
+            $maxId = product::max('id');
+            $data_2['product_id'] = $maxId;
+            //dd($data_2);
+            $status=image::create($data_2);
         }
         else{
             session()->flash('error','Lỗi, Hãy Xem lại');
@@ -76,8 +86,13 @@ class ProductController extends Controller
     public function productdelete($id)
     {
         $product=product::find($id);
+        $product_images = image::where('product_id',$product->id)->get();
+        //dd($product_images);
         if($product){
             $status=$product->delete();
+            foreach ($product_images as $image) {
+                $image->delete();
+            }
             if($status){
                 session()->flash('success','Xóa product thành công');
             }
