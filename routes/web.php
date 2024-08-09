@@ -11,6 +11,7 @@ use App\Http\Controllers\Backend\UsersController;
 use App\Http\Controllers\Backend\ImageController;
 use App\Http\Controllers\Backend\CartController;
 use App\Http\Controllers\Backend\OrdersController;
+use App\Http\Controllers\Backend\UserController;
 use Illuminate\Support\Facades\Http;
 use App\Http\Middleware\AuthenticateMiddleware;
 
@@ -122,7 +123,12 @@ Route::get('/get-ward-name/{ward_id}', [UsersController::class, 'getWardName'])-
 // });
 // admin-orders
 Route::get('orders', [OrdersController::class, 'index'])->name('admin.orders')->middleware(AuthenticateMiddleware::class);
-
+Route::post('ordersdoupdate/{id}', [OrdersController::class, 'ordersdoupdate'])->where(['id' => '[0-9]+'])->name
+('admin.ordersdoupdate')->middleware(AuthenticateMiddleware::class);
+Route::delete('orderscancel/{id}', [OrdersController::class, 'orderscancel'])->where(['id' => '[0-9]+'])->name
+('admin.orderscancel')->middleware(AuthenticateMiddleware::class);
+Route::get('get-order-details/{id}', [OrdersController::class, 'getOrderDetails'])->where(['id' => '[0-9]+'])->name
+('admin.getOrderDetails')->middleware(AuthenticateMiddleware::class);;
 
 Route::group(['prefix' => 'laravel-filemanager', 'middleware' => ['web', 'auth']], function () {
     \UniSharp\LaravelFilemanager\Lfm::routes();
@@ -137,6 +143,8 @@ Route::get('checkout', [CartController::class, 'checkout'])->name
 ('user.checkout')->middleware(AuthenticateMiddleware::class);
 Route::post('/add-to-cart/{id}', [CartController::class, 'AddToCart'])->where(['id' => '[0-9]+'])->name
 ('single-add-to-cart')->middleware(AuthenticateMiddleware::class);
+Route::post('/add-many-cart/{id}', [CartController::class, 'AddManyCart'])->where(['id' => '[0-9]+'])->name
+('many-add-to-cart')->middleware(AuthenticateMiddleware::class);
 Route::post('deletesinglecart/{id}', [CartController::class, 'deletesinglecart'])->where(['id' => '[0-9]+'])->name
 ('user.deletesinglecart')->middleware(AuthenticateMiddleware::class);
 Route::post('deleteallcart', [CartController::class, 'deleteallcart'])->where(['id' => '[0-9]+'])->name
@@ -150,11 +158,23 @@ Route::get('order_list', [CartController::class, 'order_list'])->name('user.orde
 
 Route::get('tracking_order/{id}', [CartController::class, 'tracking_order'])->where(['id' => '[0-9]+'])->name
 ('user.tracking_order')->middleware(AuthenticateMiddleware::class);
-Route::post('paymentmomo', [CartController::class, 'paymentmomo'])->name('user.paymentmomo')->middleware(AuthenticateMiddleware::class);;
+Route::post('ordercomfirm/{id}', [OrdersController::class, 'ordercomfirm'])->where(['id' => '[0-9]+'])->name
+('user.ordercomfirm')->middleware(AuthenticateMiddleware::class);
+// Route::delete('userordercancel/{id}', [OrdersController::class, 'userordercancel'])->where(['id' => '[0-9]+'])->name
+// ('user.userordercancel')->middleware(AuthenticateMiddleware::class);
+Route::get('allproduct', [UserController::class, 'allproduct'])->name('user.allproduct');
+Route::get('productbycate/{id}', [UserController::class, 'productbycate'])->where(['id' => '[0-9]+'])->name
+('user.productbycate');
+Route::get('productbycatename/{name}', [UserController::class, 'productbycatename'])->name
+('user.productbycatename');
+Route::get('/search', [UserController::class, 'search'])->name('user.search');
+
+
+
+Route::post('paymentmomo', [CartController::class, 'paymentmomo'])->name('user.paymentmomo')->middleware(AuthenticateMiddleware::class);
 Route::get('thanksfororder', [CartController::class, 'thanksfororder'])->name
 ('user.thanksfororder')->middleware(AuthenticateMiddleware::class);
-
-
 Route::post('/payment', [CartController::class, 'pay'])->name('payment');
 Route::get('/payment/return', [CartController::class, 'return'])->name('payment.return');
 Route::post('/payment/notify', [CartController::class, 'notify'])->name('payment.notify');
+Route::post('/submitreview', [UserController::class, 'submitreview'])->name('user.submitreview')->middleware(AuthenticateMiddleware::class);

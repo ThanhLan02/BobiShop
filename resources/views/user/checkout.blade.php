@@ -229,7 +229,7 @@
     $('#street').on('change', function() {
         var newValue = $(this).val();
         $('#address').val(newValue + ", " + $('#address').val());
-        $('#address2').val(newValue + ", " + $('#address').val());
+        $('#address2').val(newValue + ", " + $('#address2').val());
     });
 
     function copyValue() {

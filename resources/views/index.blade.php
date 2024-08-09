@@ -15,7 +15,7 @@
 						</div>
 						<div class="shop-body">
 							<h3>TẤT CẢ<br>SẢN PHẨM</h3>
-							<a href="#" class="cta-btn">XEM THỬ <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="/allproduct" class="cta-btn">XEM THỬ <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -29,7 +29,7 @@
 						</div>
 						<div class="shop-body">
 							<h3>TẤT CẢ<br>BEYBLADE</h3>
-							<a href="#" class="cta-btn">XEM THỬ <i class="fa fa-arrow-circle-right"></i></a>
+							<a href="/productbycatename/BEYBLADE" class="cta-btn">XEM THỬ <i class="fa fa-arrow-circle-right"></i></a>
 						</div>
 					</div>
 				</div>
@@ -84,7 +84,7 @@
 								<div class="products-slick" data-nav="#slick-nav-1">
 									<!-- product -->
 									 @foreach($product_news as $product)
-									 <form action="{{ route('single-add-to-cart',$product->id) }}" method="POST" >
+									<form action="{{ route('single-add-to-cart',$product->id) }}" method="POST" >
 									@csrf
 									<div class="product">
 										<div class="product-img">
@@ -121,10 +121,16 @@
 														class="tooltipp">quick view</span></button>
 											</div>
 										</div>
+										@if($product->quantity > 0)
 										<div class="add-to-cart">
 											<button class="add-to-cart-btn"><i class="fa fa-shopping-cart"></i> Thêm vào
 												giỏ hàng</button>
 										</div>
+										@else
+										<div class="add-to-cart" style="color: white;">
+											HẾT HÀNG
+										</div>
+										@endif
 									</div>
 									 </form>
 									@endforeach

@@ -36,16 +36,31 @@ class CartController extends Controller
         $cart = cart::where('user_id', Session::get('user'))->get();
         $tongtien = cart::where('user_id', Session::get('user'))->sum('amount');
         $user = User::where('id', Session::get('user'))->first();
-        return view('user.checkout', compact('cart', 'tongtien', 'user', 'provinces'));
+        $itemCount = $cart->count();
+        if($itemCount > 0)
+        {
+            return view('user.checkout', compact('cart', 'tongtien', 'user', 'provinces'));
+        }
+        else
+        {
+            session()->flash('success','Bạn chưa chọn sản phẩm nào cả');
+            return redirect()->route('Home.index');
+        }
+        
     }
     public function AddToCart($id)
     {
         $product = $this->product->findOrFail($id);
         $cart = cart::where('product_id', $id)->where('user_id', Session::get('user'))->get();
-        //dd($cart);
+        //dd($product->quantity);
         if (count($cart) > 0) {
             foreach ($cart as $key) {
                 $key->quantity = $key->quantity + 1;
+                if($product->quantity < $key->quantity)
+                {
+                    session()->flash('error','Sản phẩm không đủ hàng');
+                    return redirect()->back();
+                }
                 $key->amount = $key->quantity * $key->price;
                 $key->save();
             }
@@ -70,6 +85,50 @@ class CartController extends Controller
         }
         return redirect()->back()->with('success', 'Thêm vào giỏ hàng thành công');
     }
+    public function AddManyCart(Request $request,$id)
+    {
+        $product = $this->product->findOrFail($id);
+        $cart = cart::where('product_id', $id)->where('user_id', Session::get('user'))->get();
+        //dd($cart);
+        // if ($product->quantity < $request->input('quantity')) 
+        // {
+        //     session()->flash('success', 'Sản phẩm không đủ hàng');
+        //     return redirect()->back();
+        // }
+        if (count($cart) > 0) {
+            foreach ($cart as $key) {
+                $key->quantity = $key->quantity + $request->input('quantity');
+                if ($product->quantity < $key->quantity) {
+                    session()->flash('error', 'Sản phẩm không đủ hàng');
+                    return redirect()->back();
+                }
+                $key->amount = $key->quantity * $key->price;
+                $key->save();
+            }
+        } else if ($product->quantity < $request->input('quantity')) {
+            session()->flash('error', 'Sản phẩm không đủ hàng');
+            return redirect()->back();
+        } else {
+            if ($product->discount == null || $product->discount == 0) {
+                $addcart = new cart();
+                $addcart->user_id = Session::get('user');
+                $addcart->product_id = $product->id;
+                $addcart->quantity = $request->input('quantity');
+                $addcart->price = $product->old_price * $request->input('quantity');
+                $addcart->amount = $product->old_price * $request->input('quantity');
+                $addcart->save();
+            } else {
+                $addcart = new cart();
+                $addcart->user_id = Session::get('user');
+                $addcart->product_id = $product->id;
+                $addcart->quantity = $request->input('quantity');
+                $addcart->price = $product->new_price * $request->input('quantity');
+                $addcart->amount = $product->new_price * $request->input('quantity');
+                $addcart->save();
+            }
+        }
+        return redirect()->back()->with('success', 'Thêm vào giỏ hàng thành công');
+    }
     public function deletesinglecart($id)
     {
         $cart = cart::find($id);
@@ -77,7 +136,7 @@ class CartController extends Controller
             $cart->delete();
             session()->flash('success', 'Xóa thành công');
         } else {
-            session()->flash('success', 'Xóa không thành công');
+            session()->flash('error', 'Xóa không thành công');
         }
         return redirect()->back();
     }
@@ -97,6 +156,13 @@ class CartController extends Controller
     public function updatequantitycart(Request $request, $id)
     {
         $cart = cart::find($id);
+        $product = product::where('id',$cart->product_id)->get();
+        foreach ($product as $item) {
+            if ($item->quantity < $cart->quantity) {
+                session()->flash('success', 'Sản phẩm không đủ');
+                return redirect()->back();
+            }
+        }
         if ($cart) {
             $cart->quantity = $request->quantity;
             $cart->amount = $request->quantity * $cart->price;

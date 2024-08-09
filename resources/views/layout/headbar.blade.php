@@ -1,5 +1,13 @@
 		<!-- HEADER -->
 		<header>
+			@php
+			use App\Models\Cart;
+			use App\Models\category;
+			$cartlist = cart::where('user_id', Session::get('user'))->get();
+			$sl = $cartlist->count();
+			$tongtien = cart::where('user_id',Session::get('user'))->sum('amount');
+			$categories = category::all();
+			@endphp
 			<!-- TOP HEADER -->
 			<div id="top-header">
 				<div class="container">
@@ -10,12 +18,12 @@
 					</ul>
 					<ul class="header-links pull-right">
 						<li><a href="#"><i class="fa fa-dollar"></i> VND</a></li>
-						
+
 						@if(Session::has('user'))
-							<li><a href="#"><i class="fa fa-user"></i> HI {{Session::get('username')}}</a></li>
-							<li><a href="/logout"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
+						<li><a href="#"><i class="fa fa-user"></i> HI {{Session::get('username')}}</a></li>
+						<li><a href="/logout"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
 						@else
-							<li><a href="/login"><i class="fa fa-user-o"></i> LOGIN</a></li>
+						<li><a href="/login"><i class="fa fa-user-o"></i> LOGIN</a></li>
 						@endif
 					</ul>
 				</div>
@@ -44,11 +52,10 @@
 								<form>
 									<select class="input-select">
 										<option value="0">All Categories</option>
-										<option value="1">Category 01</option>
-										<option value="1">Category 02</option>
 									</select>
-									<input class="input" placeholder="Search here">
-									<button class="search-btn">Search</button>
+									<input class="input" id="search-input" placeholder="Nhập từ khóa..." value="">
+									<button class="search-btn" type="submit">Search</button>
+									<div id="search-results"></div>
 								</form>
 							</div>
 						</div>
@@ -66,12 +73,7 @@
 									</a>
 								</div>
 								<!-- /Wishlist -->
-								@php
-								use App\Models\Cart;
-								$cartlist = cart::where('user_id', Session::get('user'))->get();
-								$sl = $cartlist->count();
-								$tongtien = cart::where('user_id',Session::get('user'))->sum('amount');
-								@endphp
+
 								<!-- Cart -->
 								<div class="dropdown">
 									<a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
@@ -82,7 +84,7 @@
 									<div class="cart-dropdown">
 										<div class="cart-list">
 											<!-- Cart LIST-->
-											 @foreach($cartlist as $key)
+											@foreach($cartlist as $key)
 											<div class="product-widget">
 												<div class="product-img">
 													<img src="{{$key->products->image}}" alt="" width="60px" height="60px">
@@ -101,12 +103,12 @@
 										</div>
 										<div class="cart-btns">
 											<a href="/cart">View Cart</a>
-											<a href="#">Checkout  <i class="fa fa-arrow-circle-right"></i></a>
+											<a href="/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
 										</div>
 									</div>
 								</div>
 								<!-- /Cart -->
-								
+
 								<!-- Menu Toogle -->
 								<div class="menu-toggle">
 									<a href="#">
@@ -136,10 +138,9 @@
 					<!-- NAV -->
 					<ul class="main-nav nav navbar-nav">
 						<li class="active"><a href="#">Trang Chủ</a></li>
-						<li><a href="#">Khuyến Mãi</a></li>
-						<li><a href="#">Xe cơ giới</a></li>
-						<li><a href="#">Tài xế</a></li>
-						<li><a href="#">About</a></li>
+						@foreach($categories as $key)
+						<li><a href="#">{{$key->name}}</a></li>
+						@endforeach
 					</ul>
 					<!-- /NAV -->
 				</div>
