@@ -178,3 +178,6 @@ Route::post('/payment', [CartController::class, 'pay'])->name('payment');
 Route::get('/payment/return', [CartController::class, 'return'])->name('payment.return');
 Route::post('/payment/notify', [CartController::class, 'notify'])->name('payment.notify');
 Route::post('/submitreview', [UserController::class, 'submitreview'])->name('user.submitreview')->middleware(AuthenticateMiddleware::class);
+Route::get('/profile', [UserController::class, 'profile'])->name('user.profile')->middleware(AuthenticateMiddleware::class);
+Route::post('updateprofile/{id}', [UserController::class, 'updateprofile'])->where(['id' => '[0-9]+'])->name
+('user.updateprofile')->middleware(AuthenticateMiddleware::class);

@@ -37,10 +37,14 @@
                     <div class="checkbox-filter">
                     @foreach ($categories as $category)
                         <div class="input-checkbox">
+                            @if ($name == $category->name)
+                            <input type="checkbox" id="category-1" checked>
+                            @else
                             <input type="checkbox" id="category-1">
+                            @endif
                             <label for="category-1">
                                 <span></span>
-                                {{ $category->name }}
+                                <a href="{{route('user.productbycatename',$category->name)}}">{{ $category->name }}</a>
                                 <small>(120)</small>
                             </label>
                         </div>
@@ -107,12 +111,13 @@
                 <!-- /aside Widget -->
             </div>
             <!-- /ASIDE -->
-
+            @if(count($products) > 0)
             <!-- STORE -->
             <div id="store" class="col-md-9">
                 <!-- store products -->
                 <div class="row">
                     <!-- product -->
+                     
                      @foreach($products as $product)
                      <form action="{{ route('single-add-to-cart',$product->id) }}" method="POST" >
 					@csrf
@@ -167,6 +172,9 @@
                 </div>
                 <!-- /store bottom filter -->
             </div>
+            @else
+            <h2>Những mặt hàng thuộc loại <bold>{{$category->name}}</bold> đã hết!! Vui lòng chờ một thời gian để nhập hàng <br/> Xin chân thành cảm ơn.</h2>
+            @endif
             <!-- /STORE -->
         </div>
         <!-- /row -->

@@ -28,13 +28,23 @@ class HomeController extends Controller
                                 ->paginate(4);
         $reviews = product_review::where('product_id', $product->id)->paginate(3);
         $starCounts = product_review::selectRaw('rate, COUNT(*) as count')
+        ->where('product_id', $product->id)
         ->groupBy('rate')
         ->orderBy('rate', 'desc')
         ->get();
-        $sumstar = product_review::sum('rate');
+        $sumstar = product_review::where('product_id', $product->id)->sum('rate');
         $sumuser = product_review::where('product_id', $product->id)->count();
-        $avgstar = $sumstar/$sumuser;
-        //dd($avgstar);
+        if($sumstar != 0 && $sumuser != 0)
+        {
+            $avgstar = $sumstar/$sumuser;
+            
+        }
+        else
+        {
+            $avgstar = 0;
+        }
+        
+        //dd($sumuser);
         $product_image = image::where('product_id', '=', $id)->get();
         //dd($product_image);
         return view('user.product_detail', compact('product','product_image','product_image','starCounts','sumstar','sumuser','avgstar','reviews','product_other'));

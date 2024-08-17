@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Session;
 use App\Models\User;
+use App\Models\orders;
+use App\Models\product;
 
 class DashboardController extends Controller
 {
@@ -15,21 +17,17 @@ class DashboardController extends Controller
     }
     public function index()
     {
+        $order_new = orders::where('status', 'new')->count();
+        $order_delivered = orders::where('status', 'delivered')->count();
+        $users = User::where('role', 'user')->count();
+        $totalrevenue = orders::where('status', 'delivered')->sum('amount');
+        $totalproduct = product::where('quantity', '>','0')->count();
         if(Session::get('user') > 0)
         {
             $find = User::find(Session::get('user'));
             if($find->role == 'admin')
             {
-                // $danhthucn = hoadon::where('NguoiNhan',Session::get('user'))->sum('TongTien');
-                // $danhthucnformat = number_format($danhthucn,0);
-                // $doanhthu = hoadon::sum('TongTien');
-                // $doanhthucnformat = number_format($doanhthu,0);
-                // $sodon = hoadon::count();
-                // $sodonphantram = hoadon::count() / 10000;
-                // $dg1 = danhgia::count();
-                // $dg2 = danhgia_taixe::count();
-                // $sodanhgia = $dg1 + $dg2;
-                return view('admin.dashboard')->with('success','Chào mừng trở lại');
+                return view('admin.dashboard',compact('order_new','users','totalrevenue','totalproduct','order_delivered'))->with('success','Chào mừng trở lại');
             }
             else
             {

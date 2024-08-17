@@ -12,7 +12,6 @@
     <!-- Content Wrapper -->
     <!-- End of Main Content -->
     @include('layout.footer')
-    @stack('scripts')
 </body>
 
 </html>

@@ -163,29 +163,44 @@
                                         <div class="rating-avg">
                                             <span>{{number_format($avgstar,2)}}</span>
                                             <div class="rating-stars">
-                                                @for ($i = 1; $i <= $avgstar; $i++) <i class="fa fa-star"></i>
-                                                    @endfor
-                                                    @if($avgstar>=4)
-                                                    <i class="fa fa-star-o"></i>
-                                                    @elseif($avgstar>=3)
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    @elseif($avgstar>=2)
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    @elseif($avgstar>=1)
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    @else
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    <i class="fa fa-star-o"></i>
-                                                    @endif
+                                                @if($avgstar==5)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                @elseif($avgstar==4)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                @elseif($avgstar==3)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                @elseif($avgstar==2)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                @elseif($avgstar==1)
+                                                <i class="fa fa-star"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                @else
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                <i class="fa fa-star-o"></i>
+                                                @endif
+
                                             </div>
                                         </div>
                                         <ul class="rating">
@@ -198,7 +213,7 @@
                                                     <i class="fa fa-star"></i>
                                                 </div>
                                                 @foreach($starCounts as $star)
-                                                @if($star->rate == 5)
+                                                @if($star->rate == 5 && $sumuser > 0)
                                                 <div class="rating-progress">
                                                     <div style="width: {{$star->count/$sumuser*100}}%;"></div>
                                                 </div>
@@ -219,7 +234,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 @foreach($starCounts as $star)
-                                                @if($star->rate == 4)
+                                                @if($star->rate == 4 && $sumuser > 0)
                                                 <div class="rating-progress">
                                                     <div style="width: {{$star->count/$sumuser*100}}%;"></div>
                                                 </div>
@@ -240,7 +255,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 @foreach($starCounts as $star)
-                                                @if($star->rate == 3)
+                                                @if($star->rate == 3 && $sumuser > 0)
                                                 <div class="rating-progress">
                                                     <div style="width: {{$star->count/$sumuser*100}}%;"></div>
                                                 </div>
@@ -261,7 +276,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 @foreach($starCounts as $star)
-                                                @if($star->rate == 2)
+                                                @if($star->rate == 2 && $sumuser > 0)
                                                 <div class="rating-progress">
                                                     <div style="width: {{$star->count/$sumuser*100}}%;"></div>
                                                 </div>
@@ -282,7 +297,7 @@
                                                     <i class="fa fa-star-o"></i>
                                                 </div>
                                                 @foreach($starCounts as $star)
-                                                @if($star->rate == 1)
+                                                @if($star->rate == 1 && $sumuser > 0)
                                                 <div class="rating-progress">
                                                     <div style="width: {{$star->count/$sumuser*100}}%;"></div>
                                                 </div>

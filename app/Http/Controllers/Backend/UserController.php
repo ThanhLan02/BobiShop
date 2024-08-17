@@ -3,10 +3,13 @@
 namespace App\Http\Controllers\Backend;
 
 use App\Http\Controllers\Controller;
+use App\Http\Requests\UsersRequest;
 use Illuminate\Http\Request;
 use App\Models\product;
 use App\Models\category;
 use App\Models\brand;
+use App\Models\User;
+use App\Models\province;
 use App\Models\product_review;
 use Illuminate\Support\Facades\Session;
 
@@ -28,7 +31,7 @@ class UserController extends Controller
         $count_all = $products->count();
         $categories = category::all();
         $brands = brand::all();
-        return view('user.productbycatename',compact('products','count_all','categories','brands'));
+        return view('user.productbycatename',compact('products','count_all','categories','brands','name'));
     }
     public function productbycate($id){
         $cate = category::find($id);
@@ -59,5 +62,26 @@ class UserController extends Controller
         $review->save();
 
         return redirect()->back()->with('success', 'Cảm ơn bạn đã nhận xét');
+    }
+    public function profile()
+    {
+        $user = User::find(Session::get('user'));
+        $provinces = province::all();
+        return view('user.profile',compact('user','provinces'));
+    }
+    public function updateprofile(Request $request,$id)
+    {
+        //dd($request);
+        $user = User::find($id);
+        $user->name = $request->name;
+        $user->email = $request->email;
+        $user->phone = $request->phone;
+        $user->birthday = $request->birthday;
+        $user->gender = $request->gender;
+        $user->description = $request->description;
+        $user->address = $request->address;
+        $user->save();
+
+        return redirect()->back()->with('success', 'Cập nhật thông tin thành công');
     }
 }
