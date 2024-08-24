@@ -150,7 +150,7 @@
 	<!-- /SECTION -->
 	
 
-
+	@if(count($product_hots) > 0)
 	<!-- SECTION -->
 	<div class="section">
 		<!-- container -->
@@ -176,7 +176,7 @@
 					<div class="row">
 						<div class="products-tabs">
 							<!-- tab -->
-							@if(count($product_hots) > 0)
+							
 							<div id="tab1" class="tab-pane active">
 								<div class="products-slick" data-nav="#slick-nav-2">
 									<!-- product -->
@@ -195,7 +195,7 @@
 										</div>
 										<div class="product-body">
 											<p class="product-category">{{$product->category->name}}</p>
-											<h3 class="product-name"><a href="product_detail/{{$product->id}}">{{$product->name}}</a></h3>
+											<h3 class="product-name"><a href="{{ route('home.product_detail',$product->id) }}">{{$product->name}}</a></h3>
 											@if($product->discount != null)
 											<h4 class="product-price">{{number_format($product->new_price, 0)}} VNĐ <del
 													class="product-old-price">{{number_format($product->old_price, 0)}} VNĐ</del></h4>
@@ -230,9 +230,7 @@
 								<div id="slick-nav-2" class="products-slick-nav"></div>
 							</div>
 							<!-- /tab -->
-							 @else
-
-							 @endif
+							 
 						</div>
 					</div>
 				</div>
@@ -243,7 +241,9 @@
 		<!-- /container -->
 	</div>
 	<!-- /SECTION -->
+	@else
 
+	@endif
 	<!-- SECTION -->
 	<div class="section">
 		<!-- container -->
@@ -252,7 +252,7 @@
 			<div class="row">
 				<div class="col-md-4 col-xs-6">
 					<div class="section-title">
-						<h4 class="title">Thiết Bị & Tài Xế HOT</h4>
+						<h4 class="title">Một số sản phẩm mới</h4>
 						<div class="section-nav">
 							<div id="slick-nav-3" class="products-slick-nav"></div>
 						</div>
@@ -261,97 +261,56 @@
 					<div class="products-widget-slick" data-nav="#slick-nav-3">
 						<div>
 							<!-- product widget -->
+							@foreach ($product_new_list_1 as $key)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product001.png" alt="">
+									<img src="{{$key->image}}" alt="">
 								</div>
 								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
+									<p class="product-category">{{$key->category->name}}</p>
+									<h3 class="product-name"><a href="{{ route('home.product_detail',$key->id) }}">{{$key->name}}</a></h3>
+									@if ($key->discount > 0 && $key->discount != null)
+									<h4 class="product-price">{{number_format($key->new_price,0)}} <del class="product-old-price">{{number_format($key->old_price,0)}}
+										VNĐ</del></h4>
+									@else
+									<h4 class="product-price">{{number_format($key->old_price,0)}} VNĐ </h4>
+									@endif
+									
 								</div>
 							</div>
+							@endforeach
+							
 							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product001.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product001.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- product widget -->
 						</div>
 
 						<div>
 							<!-- product widget -->
+							@foreach ($product_new_list_2 as $key)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product001.png" alt="">
+									<img src="{{$key->image}}" alt="">
 								</div>
 								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
+									<p class="product-category">{{$key->category->name}}</p>
+									<h3 class="product-name"><a href="{{ route('home.product_detail',$key->id) }}">{{$key->name}}</a></h3>
+									@if ($key->discount > 0 && $key->discount != null)
+									<h4 class="product-price">{{number_format($key->new_price,0)}} <del class="product-old-price">{{number_format($key->old_price,0)}}
+										VNĐ</del></h4>
+									@else
+									<h4 class="product-price">{{number_format($key->old_price,0)}} VNĐ </h4>
+									@endif
+									
 								</div>
 							</div>
+							@endforeach
 							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product003.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product002.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- product widget -->
 						</div>
 					</div>
 				</div>
 
 				<div class="col-md-4 col-xs-6">
 					<div class="section-title">
-						<h4 class="title">Thiết Bị & Tài Xế Mới</h4>
+						<h4 class="title">Một số sản phẩm hot</h4>
 						<div class="section-nav">
 							<div id="slick-nav-4" class="products-slick-nav"></div>
 						</div>
@@ -360,90 +319,49 @@
 					<div class="products-widget-slick" data-nav="#slick-nav-4">
 						<div>
 							<!-- product widget -->
+							@foreach ($product_hot_list_1 as $key)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product001.png" alt="">
+									<img src="{{$key->image}}" alt="">
 								</div>
 								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
+									<p class="product-category">{{$key->category->name}}</p>
+									<h3 class="product-name"><a href="{{ route('home.product_detail',$key->id) }}">{{$key->name}}</a></h3>
+									@if ($key->discount > 0 && $key->discount != null)
+									<h4 class="product-price">{{number_format($key->new_price,0)}} <del class="product-old-price">{{number_format($key->old_price,0)}}
+										VNĐ</del></h4>
+									@else
+									<h4 class="product-price">{{number_format($key->old_price,0)}} VNĐ </h4>
+									@endif
+									
 								</div>
 							</div>
+							@endforeach
+							
 							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product002.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product003.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- product widget -->
 						</div>
 
 						<div>
 							<!-- product widget -->
+							@foreach ($product_hot_list_2 as $key)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product004.png" alt="">
+									<img src="{{$key->image}}" alt="">
 								</div>
 								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
+									<p class="product-category">{{$key->category->name}}</p>
+									<h3 class="product-name"><a href="{{ route('home.product_detail',$key->id) }}">{{$key->name}}</a></h3>
+									@if ($key->discount > 0 && $key->discount != null)
+									<h4 class="product-price">{{number_format($key->new_price,0)}} <del class="product-old-price">{{number_format($key->old_price,0)}}
+										VNĐ</del></h4>
+									@else
+									<h4 class="product-price">{{number_format($key->old_price,0)}} VNĐ </h4>
+									@endif
+									
 								</div>
 							</div>
+							@endforeach
 							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product005.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product001.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- product widget -->
 						</div>
 					</div>
 				</div>
@@ -461,90 +379,49 @@
 					<div class="products-widget-slick" data-nav="#slick-nav-5">
 						<div>
 							<!-- product widget -->
+							@foreach ($product_new_list_1 as $key)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product001.png" alt="">
+									<img src="{{$key->image}}" alt="">
 								</div>
 								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
+									<p class="product-category">{{$key->category->name}}</p>
+									<h3 class="product-name"><a href="{{ route('home.product_detail',$key->id) }}">{{$key->name}}</a></h3>
+									@if ($key->discount > 0 && $key->discount != null)
+									<h4 class="product-price">{{number_format($key->new_price,0)}} <del class="product-old-price">{{number_format($key->old_price,0)}}
+										VNĐ</del></h4>
+									@else
+									<h4 class="product-price">{{number_format($key->old_price,0)}} VNĐ </h4>
+									@endif
+									
 								</div>
 							</div>
+							@endforeach
+							
 							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product003.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product002.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- product widget -->
 						</div>
 
 						<div>
 							<!-- product widget -->
+							@foreach ($product_new_list_2 as $key)
 							<div class="product-widget">
 								<div class="product-img">
-									<img src="./img/product004.png" alt="">
+									<img src="{{$key->image}}" alt="">
 								</div>
 								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
+									<p class="product-category">{{$key->category->name}}</p>
+									<h3 class="product-name"><a href="{{ route('home.product_detail',$key->id) }}">{{$key->name}}</a></h3>
+									@if ($key->discount > 0 && $key->discount != null)
+									<h4 class="product-price">{{number_format($key->new_price,0)}} <del class="product-old-price">{{number_format($key->old_price,0)}}
+										VNĐ</del></h4>
+									@else
+									<h4 class="product-price">{{number_format($key->old_price,0)}} VNĐ </h4>
+									@endif
+									
 								</div>
 							</div>
+							@endforeach
 							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product005.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- /product widget -->
-
-							<!-- product widget -->
-							<div class="product-widget">
-								<div class="product-img">
-									<img src="./img/product001.png" alt="">
-								</div>
-								<div class="product-body">
-									<p class="product-category">Thiết bị cơ giới</p>
-									<h3 class="product-name"><a href="#">Cẩu trục bánh lốp 25 Tấn</a></h3>
-									<h4 class="product-price">5.000.000 VNĐ <del class="product-old-price">6.000.000
-											VNĐ</del></h4>
-								</div>
-							</div>
-							<!-- product widget -->
 						</div>
 					</div>
 				</div>

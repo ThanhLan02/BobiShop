@@ -20,7 +20,7 @@
 						<li><a href="#"><i class="fa fa-dollar"></i> VND</a></li>
 
 						@if(Session::has('user'))
-						<li><a href="#"><i class="fa fa-user"></i> HI {{Session::get('username')}}</a></li>
+						<li><a href="/profile"><i class="fa fa-user"></i> HI {{Session::get('username')}}</a></li>
 						<li><a href="/logout"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
 						@else
 						<li><a href="/login"><i class="fa fa-user-o"></i> LOGIN</a></li>
@@ -64,7 +64,7 @@
 						<!-- ACCOUNT -->
 						<div class="col-md-3 clearfix">
 							<div class="header-ctn">
-								<!-- Wishlist -->
+								{{-- <!-- Wishlist -->
 								<div>
 									<a href="#">
 										<i class="fa fa-heart-o"></i>
@@ -72,7 +72,7 @@
 										<div class="qty">2</div>
 									</a>
 								</div>
-								<!-- /Wishlist -->
+								<!-- /Wishlist --> --}}
 
 								<!-- Cart -->
 								<div class="dropdown">

@@ -62,7 +62,7 @@
                     <button type="submit" name="send" value="send" class="btn btn-success rounded-0">Xóa hết</button>
                     <a href="/checkout" class="btn btn-danger rounded-0">XÁC NHẬN THUÊ</a>
                 <a href="/" class="btn btn-warning rounded-0">Tiếp tục mua</a>
-                <a href="/donhang" class="btn btn-info rounded-0">Xem các đơn hàng đã mua</a>
+                <a href="{{route('user.order_list')}}" class="btn btn-info rounded-0">Xem các đơn hàng đã mua</a>
                 </form>
                 
             </div>

@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <ul class="breadcrumb-tree">
                     <li><a href="#">Trang chủ</a></li>
-                    <li><a href="#">Tất cả loại sản phẩm</a></li>
+                    <li><a href="#">Tất cả hãng sản phẩm</a></li>
                     <li><a href="#">{{$name}}</a></li>
                     <li class="active">Sản phẩm ({{$count_all}} Kết quả)</li>
                 </ul>
@@ -58,7 +58,11 @@
                     @foreach ($brands as $brand)
                     <div class="checkbox-filter">
                         <div class="input-checkbox">
+                            @if ($name == $brand->name)
+                            <input type="checkbox" id="brand-1" checked>
+                            @else
                             <input type="checkbox" id="brand-1">
+                            @endif
                             <label for="brand-1">
                                 <span></span>
                                 <a href="{{route('user.productbybrandname',$brand->name)}}">{{ $brand->name }}</a>

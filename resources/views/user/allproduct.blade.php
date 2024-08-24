@@ -39,7 +39,7 @@
                             <input type="checkbox" id="category-1">
                             <label for="category-1">
                                 <span></span>
-                                {{ $category->name }}
+                                <a href="{{route('user.productbycatename',$category->name)}}">{{ $category->name }}</a>
                                 <small>(120)</small>
                             </label>
                         </div>
@@ -57,7 +57,7 @@
                             <input type="checkbox" id="brand-1">
                             <label for="brand-1">
                                 <span></span>
-                                {{ $brand->name }}
+                                <a href="{{route('user.productbybrandname',$brand->name)}}">{{ $brand->name }}</a>
                                 <small>(578)</small>
                             </label>
                         </div>
@@ -69,39 +69,25 @@
 
                 <!-- aside Widget -->
                 <div class="aside">
-                    <h3 class="aside-title">Mặt hàng bán chạy</h3>
+                    <h3 class="aside-title">Mặt hàng khuyến mãi</h3>
+                    @foreach ($product_discount as $key)
                     <div class="product-widget">
                         <div class="product-img">
-                            <img src="./img/product01.png" alt="">
+                            <img src="{{$key->image}}" alt="">
                         </div>
                         <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
+                            <p class="product-category">{{$key->category->name}}</p>
+                            <h3 class="product-name"><a href="{{ route('home.product_detail',$key->id) }}">{{$key->name}}</a></h3>
+                            @if ($key->discount > 0 && $key->discount != 0)
+                            <h4 class="product-price">{{number_format($key->new_price,0)}} VNĐ <del class="product-old-price">{{number_format($key->old_price,0)}} VNĐ</del></h4>
+                            @else
+                            <h4 class="product-price">{{number_format($key->old_price,0)}} VNĐ</h4>
+                            @endif
+                            
                         </div>
                     </div>
+                    @endforeach
 
-                    <div class="product-widget">
-                        <div class="product-img">
-                            <img src="./img/product02.png" alt="">
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                        </div>
-                    </div>
-
-                    <div class="product-widget">
-                        <div class="product-img">
-                            <img src="./img/product03.png" alt="">
-                        </div>
-                        <div class="product-body">
-                            <p class="product-category">Category</p>
-                            <h3 class="product-name"><a href="#">product name goes here</a></h3>
-                            <h4 class="product-price">$980.00 <del class="product-old-price">$990.00</del></h4>
-                        </div>
-                    </div>
                 </div>
                 <!-- /aside Widget -->
             </div>
@@ -128,7 +114,7 @@
                             </div>
                             <div class="product-body">
                                 <p class="product-category">{{$product->category->name}}</p>
-                                <h3 class="product-name"><a href="/product_detail/{{$product->id}}">{{$product->name}}</a></h3>
+                                <h3 class="product-name"><a href="{{ route('home.product_detail',$product->id) }}">{{$product->name}}</a></h3>
                                 @if($product->discount > 0 && $product->discount != null)
                                     <h4 class="product-price">{{number_format($product->new_price,0)}} VNĐ<del class="product-old-price">{{number_format($product->old_price,0)}} VNĐ</del></h4>
                                 @else

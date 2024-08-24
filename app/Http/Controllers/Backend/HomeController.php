@@ -17,7 +17,11 @@ class HomeController extends Controller
     public function index(){
         $product_news = Product::where('condition', '=', 'new')->paginate(5);
         $product_hots = Product::where('condition', '=', 'hot')->paginate(5);
-        return view('index',compact('product_news', 'product_hots'));
+        $product_new_list_1 = Product::where('condition', '=', 'new')->skip(0)->take(3)->get();
+        $product_new_list_2 = Product::where('condition', '=', 'new')->skip(3)->take(3)->get();
+        $product_hot_list_1 = Product::where('condition', '=', 'hot')->skip(0)->take(3)->get();
+        $product_hot_list_2 = Product::where('condition', '=', 'hot')->skip(3)->take(3)->get();
+        return view('index',compact('product_news', 'product_hots','product_new_list_1','product_hot_list_2','product_new_list_2','product_hot_list_1'));
     }
     public function product_detail($id)
     {
@@ -25,7 +29,10 @@ class HomeController extends Controller
         $product_other = Product::where('category_id', '=', $product->category_id)
                                 ->where('quantity', '>', '0')
                                 ->where('status', '=', 'active')
-                                ->paginate(4);
+                                ->where('id', '!=', $id)
+                                ->take(4)
+                                ->get();
+        //dd($product_other);
         $reviews = product_review::where('product_id', $product->id)->paginate(3);
         $starCounts = product_review::selectRaw('rate, COUNT(*) as count')
         ->where('product_id', $product->id)
