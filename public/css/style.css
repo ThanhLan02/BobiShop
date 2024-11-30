@@ -548,7 +548,7 @@ textarea.input {
   padding: 15px;
   -webkit-box-shadow: 0px 0px 0px 2px #E4E7ED;
   box-shadow: 0px 0px 0px 2px #E4E7ED;
-  z-index: 99;
+  z-index: 100;
   right: 0;
   opacity: 0;
   visibility: hidden;
@@ -615,14 +615,36 @@ textarea.input {
   padding-bottom: 15px;
 }
 
+
 /*=========================================================
 	03 -> Navigation
 ===========================================================*/
 
 #navigation {
-  background: #FFF;
-  border-bottom: 2px solid #E4E7ED;
-  border-top: 3px solid #D10024;
+  background-color: #f8f8f8;
+  border-bottom: 2px solid #ddd;
+  position: unset;
+  /* Ban đầu ở vị trí tương đối */
+  width: 100%;
+  z-index: 1000;
+  transition: all 0.5s ease;
+  /* Hiệu ứng chuyển đổi mượt */
+  top: 0;
+  /* Ban đầu ở trên cùng */
+}
+
+/* Khi thanh điều hướng cố định */
+#navigation.fixed {
+  position: fixed;
+  /* Cố định khi cuộn xuống */
+  top: -60px;
+  /* Bắt đầu từ ngoài màn hình (ở trên) */
+  animation: slideDown 0.5s ease forwards;
+  /* Animation trượt xuống */
+  background-color: #ffffff;
+  /* Có thể đổi màu khi cố định */
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  /* Tạo hiệu ứng đổ bóng */
 }
 
 /*----------------------------*\

@@ -7,7 +7,7 @@
             <div class="row">
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">About Us</h3>
+                        <h3 class="footer-title">Về Chúng Tôi</h3>
                         <p>Chào mừng đến với Bobishop chuyên về đồ chơi con quay.Chúng tôi tự hào là địa chỉ uy tín và
                             tin cậy, mang đến cho bạn những trải nghiệm vui chơi thú vị và bổ ích.</p>
                         <ul class="footer-links">
@@ -21,7 +21,7 @@
 
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">Categories</h3>
+                        <h3 class="footer-title">Loại Sản Phẩm</h3>
                         <ul class="footer-links">
                             <li><a href="#">Beyblade</a></li>
                             <li><a href="#">NADO</a></li>
@@ -45,7 +45,7 @@
 
                 <div class="col-md-3 col-xs-6">
                     <div class="footer">
-                        <h3 class="footer-title">Service</h3>
+                        <h3 class="footer-title">Dịch Vụ</h3>
                         <ul class="footer-links">
                             <li><a href="#">Đăng nhập</a></li>
                             <li><a href="#">Đăng ký</a></li>

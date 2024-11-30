@@ -221,6 +221,44 @@
             </div>
         </div>
         <!-- /.card --> --}}
+        <h1>Biểu đồ doanh thu theo tháng</h1>
+
+        <canvas id="revenueChart" width="400" height="200"></canvas>
+
+        <script>
+            const ctx = document.getElementById('revenueChart').getContext('2d');
+            const data = {
+                labels: @json(
+                    $revenue->map(function ($item) {
+                        return $item->month . '/' . $item->year;
+                    })),
+                datasets: [{
+                    label: 'Doanh thu',
+                    data: @json(
+                        $revenue->map(function ($item) {
+                            return $item->total_revenue;
+                        })),
+                    borderColor: 'rgba(75, 192, 192, 1)',
+                    backgroundColor: 'rgba(75, 192, 192, 0.2)',
+                    borderWidth: 1
+                }]
+            };
+
+            const config = {
+                type: 'line',
+                data: data,
+                options: {
+                    responsive: true,
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    }
+                }
+            };
+
+            const revenueChart = new Chart(ctx, config);
+        </script>
     </section>
     <!-- /.Left col -->
     <!-- right col (We are only adding the ID to make the widgets sortable)-->

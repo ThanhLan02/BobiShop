@@ -30,12 +30,19 @@
                 <!-- Product main img -->
 
                 <div class="col-md-5 col-md-push-2">
+
                     <div id="product-main-img">
-                        @foreach ($product_image as $image)
+                        @if ($product_image->isEmpty())
                             <div class="product-preview">
-                                <img src="{{ asset($image->url_image) }}" alt="">
+                                <img src="/storage/photos/1/users/No_Image_Available.jpg" alt="">
                             </div>
-                        @endforeach
+                        @else
+                            @foreach ($product_image as $image)
+                                <div class="product-preview">
+                                    <img src="{{ asset($image->url_image) }}" alt="">
+                                </div>
+                            @endforeach
+                        @endif
                     </div>
                 </div>
                 <!-- /Product main img -->
@@ -43,11 +50,18 @@
                 <!-- Product thumb imgs -->
                 <div class="col-md-2  col-md-pull-5">
                     <div id="product-imgs">
-                        @foreach ($product_image as $image)
+                        @if ($product_image->isEmpty())
                             <div class="product-preview">
-                                <img src="{{ asset($image->url_image) }}" alt="">
+                                <img src="/storage/photos/1/users/No_Image_Available.jpg" alt="">
                             </div>
-                        @endforeach
+                        @else
+                            @foreach ($product_image as $image)
+                                <div class="product-preview">
+                                    <img src="{{ asset($image->url_image) }}" alt="">
+                                </div>
+                            @endforeach
+                        @endif
+
                     </div>
                 </div>
                 <!-- /Product thumb imgs -->
@@ -125,9 +139,9 @@
                     <div id="product-tab">
                         <!-- product tab nav -->
                         <ul class="tab-nav">
-                            <li class="active"><a data-toggle="tab" href="#tab1">Description</a></li>
-                            <li><a data-toggle="tab" href="#tab2">Details</a></li>
-                            <li><a data-toggle="tab" href="#tab3">Reviews ({{ $sumuser }})</a></li>
+                            <li class="active"><a data-toggle="tab" href="#tab1">Mô Tả</a></li>
+                            <li><a data-toggle="tab" href="#tab2">Thông tin</a></li>
+                            <li><a data-toggle="tab" href="#tab3">Nhận Xét ({{ $sumuser }})</a></li>
                         </ul>
                         <!-- /product tab nav -->
 
@@ -174,25 +188,25 @@
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
-                                                    @elseif($avgstar == 4)
+                                                    @elseif($avgstar >= 4)
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star-o"></i>
-                                                    @elseif($avgstar == 3)
+                                                    @elseif($avgstar >= 3)
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star-o"></i>
                                                         <i class="fa fa-star-o"></i>
-                                                    @elseif($avgstar == 2)
+                                                    @elseif($avgstar >= 2)
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star-o"></i>
                                                         <i class="fa fa-star-o"></i>
                                                         <i class="fa fa-star-o"></i>
-                                                    @elseif($avgstar == 1)
+                                                    @elseif($avgstar >= 1)
                                                         <i class="fa fa-star"></i>
                                                         <i class="fa fa-star-o"></i>
                                                         <i class="fa fa-star-o"></i>
@@ -335,6 +349,14 @@
                                                 @foreach ($reviews as $key)
                                                     <li>
                                                         <div class="review-heading">
+                                                            @if ($key->users->image == '')
+                                                                <img style="border-radius: 30%;width: 50px;height:50px;"
+                                                                    src="/storage/photos/1/users/user.png"
+                                                                    alt="logo_user">
+                                                            @else
+                                                                <img style="border-radius: 30%;width: 50px;height:50px;"
+                                                                    src="{{ $key->users->image }}" alt="logo_user">
+                                                            @endif
                                                             <h5 class="name">{{ $key->users->name }}</h5>
                                                             <div class="review-rating">
 
@@ -407,7 +429,7 @@
                                                             type="radio"><label for="star1"></label>
                                                     </div>
                                                 </div>
-                                                <button type="submit" class="primary-btn btn">Submit</button>
+                                                <button type="submit" class="primary-btn btn">Đánh giá</button>
                                             </div>
                                         </form>
                                     </div>
@@ -458,7 +480,8 @@
                                 <div class="product-body">
                                     <p class="product-category">{{ $key->category->name }}</p>
                                     <h3 class="product-name"><a
-                                            href="product_detail/{{ $key->id }}">{{ $key->name }}</a></h3>
+                                            href="{{ route('home.product_detail', $product->id) }}">{{ $key->name }}</a>
+                                    </h3>
                                     @if ($key->discount != null || $key->discount > 0)
                                         <h4 class="product-price">{{ number_format($key->new_price, 0) }} VNĐ</h4> <del
                                             class="key-old-price">{{ number_format($key->old_price, 0) }} VNĐ</del>

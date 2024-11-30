@@ -42,15 +42,21 @@ class AuthController extends Controller
         ];
         if (Auth::attempt($credentials)) {
             $find = User::find(Auth::user()->id);
-            Session::put('user', $find->id);
-            Session::put('username', $find->name);
-            //dd($find->quyen_id);
-            $userId = Auth::user()->id;
-            if ($find->role != 'admin') {
-                return redirect()->route('Home.index')->with('success', 'Đăng nhập thành công');
+            if ($find->status == 'inactive') {
+                Auth::logout();
+                return redirect()->route('auth.login')->with('error', 'Tài khoản của bạn đã bị khóa');
             } else {
-                return redirect()->route('admin.index')->with('success', 'Đăng nhập thành công');
+                Session::put('user', $find->id);
+                Session::put('username', $find->name);
+                //dd($find->quyen_id);
+                $userId = Auth::user()->id;
+                if ($find->role != 'admin') {
+                    return redirect()->route('Home.index')->with('success', 'Đăng nhập thành công');
+                } else {
+                    return redirect()->route('admin.index')->with('success', 'Đăng nhập thành công');
+                }
             }
+
             // return redirect()->route('Home.index')->with('success','Đăng nhập thành công');
         }
         return redirect()->route('auth.login')->with('error', 'Đăng nhập thất bại!! Email hoặc mật khẩu không chính xác');

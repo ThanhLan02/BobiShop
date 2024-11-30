@@ -3,17 +3,19 @@
       @php
           use App\Models\Cart;
           use App\Models\category;
+          use App\Models\brand;
           $cartlist = cart::where('user_id', Session::get('user'))->get();
           $sl = $cartlist->count();
           $tongtien = cart::where('user_id', Session::get('user'))->sum('amount');
           $categories = category::all();
+          $brands = brand::all();
       @endphp
       <!-- TOP HEADER -->
       <div id="top-header">
           <div class="container">
               <ul class="header-links pull-left">
-                  <li><a href="#"><i class="fa fa-phone"></i> 0904613293</a></li>
-                  <li><a href="#"><i class="fa fa-envelope-o"></i> tranthanhlanth9@gmail.com</a></li>
+                  <li><a href="#"><i class="fa fa-phone"></i> 0902621216 - Zalo </a></li>
+                  <li><a href="#"><i class="fa fa-envelope-o"></i> bobikidchannel@gmail.com</a></li>
                   <li><a href="#"><i class="fa fa-map-marker"></i> 75 Tô Hiệu, Hiệp Tân, Tân Phú, TPHCM</a></li>
               </ul>
               <ul class="header-links pull-right">
@@ -23,7 +25,7 @@
                       <li><a href="/profile"><i class="fa fa-user"></i> HI {{ Session::get('username') }}</a></li>
                       <li><a href="/logout"><i class="fa fa-user-plus"></i> LOGOUT</a></li>
                   @else
-                      <li><a href="/login"><i class="fa fa-user-o"></i> LOGIN</a></li>
+                      <li><a href="/login"><i class="fa fa-user-o"></i> Đăng Nhập</a></li>
                   @endif
               </ul>
           </div>
@@ -39,9 +41,8 @@
                   <!-- LOGO -->
                   <div class="col-md-3">
                       <div class="header-logo">
-                          <a href="/" class="logo">
-                              <img src="/storage/photos/1/image/logo.png" alt="">
-                          </a>
+                          <a href="/"><img class="logo" src="/storage/photos/1/image/logo.png"
+                                  alt="logo"></a>
                       </div>
                   </div>
                   <!-- /LOGO -->
@@ -78,7 +79,7 @@
                           <div class="dropdown">
                               <a class="dropdown-toggle" data-toggle="dropdown" aria-expanded="true">
                                   <i class="fa fa-shopping-cart"></i>
-                                  <span>Your Cart</span>
+                                  <span>Giỏ hàng</span>
                                   <div class="qty">{{ $sl }}</div>
                               </a>
                               <div class="cart-dropdown">
@@ -106,8 +107,8 @@
                                       <h5>TỔNG TIỀN: {{ number_format($tongtien, 0) }} VNĐ</h5>
                                   </div>
                                   <div class="cart-btns">
-                                      <a href="/cart">View Cart</a>
-                                      <a href="/checkout">Checkout <i class="fa fa-arrow-circle-right"></i></a>
+                                      <a href="/cart">Xem giỏ hàng</a>
+                                      <a href="/checkout">Thanh Toán <i class="fa fa-arrow-circle-right"></i></a>
                                   </div>
                               </div>
                           </div>
@@ -142,11 +143,31 @@
               <!-- NAV -->
               <ul class="main-nav nav navbar-nav">
                   <li class="active"><a href="#">Trang Chủ</a></li>
-                  @foreach ($categories as $key)
-                      <li><a href="#">{{ $key->name }}</a></li>
-                  @endforeach
+                  <li><a href="#">Giới Thiệu</a></li>
+                  <li><a href="#">Sản Phẩm</a></li>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" href="#">Loại sản phẩm</a>
+                      <ul class="dropdown-menu">
+                          @foreach ($categories as $key)
+                              <li><a href="{{ route('user.productbycatename', $key->name) }}">{{ $key->name }}</a>
+                              </li>
+                          @endforeach
+                      </ul>
+                  </li>
+                  <li class="dropdown">
+                      <a class="dropdown-toggle" href="#">Hãng Đồ Chơi</a>
+                      <ul class="dropdown-menu">
+                          @foreach ($brands as $key)
+                              <li><a href="{{ route('user.productbybrandname', $key->name) }}">{{ $key->name }}</a>
+                              </li>
+                          @endforeach
+                      </ul>
+                  </li>
+                  <li><a href="#">Liên Hệ</a></li>
+
               </ul>
               <!-- /NAV -->
+
           </div>
           <!-- /responsive-nav -->
       </div>

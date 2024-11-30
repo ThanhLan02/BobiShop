@@ -100,7 +100,7 @@
                                                         <div class="form-group">
                                                             <label for="birthday">Mô tả</label>
                                                             <textarea style="resize: both;box-sizing: border-box;width: 805px;" name="description" placeholder="Mô tả bản thân"
-                                                                id="txtarea" oninput="autoResize(this)"></textarea>
+                                                                id="txtarea" oninput="autoResize(this)">{{ $user->description }}</textarea>
                                                         </div>
                                                     </div>
                                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">
@@ -173,8 +173,8 @@
                                                         </div>
                                                     </div>
                                                     <!-- <div class="form-group">
-                                                                <input class="input" id="address" type="text" name="address" placeholder="Address" value="{{ $user->address }}" onchange="copyValue4()">
-                                                            </div> -->
+                                                                            <input class="input" id="address" type="text" name="address" placeholder="Address" value="{{ $user->address }}" onchange="copyValue4()">
+                                                                        </div> -->
                                                 </div>
                                                 <div class="row gutters">
                                                     <div class="col-xl-12 col-lg-12 col-md-12 col-sm-12 col-12">

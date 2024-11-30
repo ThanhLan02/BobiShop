@@ -466,3 +466,18 @@
     <!-- /SECTION -->
 
 @endsection
+
+@push('scripts')
+    <script>
+        // JavaScript thêm class "fixed" khi cuộn
+        window.addEventListener("scroll", function() {
+            var navigation = document.getElementById("navigation");
+            var scrollTop = window.scrollY || document.documentElement.scrollTop;
+            if (scrollTop > 100) { // Nếu cuộn xuống quá 100px
+                navigation.classList.add("fixed");
+            } else {
+                navigation.classList.remove("fixed");
+            }
+        });
+    </script>
+@endpush
